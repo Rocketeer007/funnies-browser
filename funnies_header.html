@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>Nick's Groovy Funnies Browser</title>
+<link rel="stylesheet" type="text/css" href="funnies.css" media="screen" />
+<script type='text/javascript' src='jquery.js'></script>
+<script type="text/javascript">
+var myPages = new Array(
+	new Array('Not Always Right', 'https://notalwaysright.com/'),
+	new Array('Not Always Working', 'https://notalwaysright.com/working'),
+	new Array('Not Always Learning', 'https://notalwaysright.com/learning'),
+	new Array('Not Always Romantic', 'https://notalwaysright.com/romantic'),
+	new Array('Not Always Related', 'https://notalwaysright.com/related'),
+	new Array('Not Always Friendly', 'https://notalwaysright.com/friendly'),
+	new Array('Not Always Hopeless', 'https://notalwaysright.com/hopeless'),
+	new Array('Not Always Healthy', 'https://notalwaysright.com/healthy'),
+	new Array('Not Always Legal', 'https://notalwaysright.com/legal'),
+	new Array('The Daily WTF', 'http://thedailywtf.com/'),
+	new Array('Not My Monkies', 'http://notmymonkies.net/')
+);
+var currentPage = 0;
+
+var $j = jQuery.noConflict();
+var down_x = null;
+var up_x = null;
+$j().ready(function(){
+  $j("#colmask").mousedown(function(e){
+    e.preventDefault();
+    down_x = e.pageX;
+  });
+  $j("#colmask").mouseup(function(e){
+    up_x = e.pageX;
+    do_work();
+  });
+  $j("#colmask").bind('touchstart', function(e){
+    down_x = e.originalEvent.touches[0].pageX;
+  });
+  $j("#colmask").bind('touchmove', function(e){
+    e.preventDefault();
+    up_x = e.originalEvent.touches[0].pageX;
+  });
+  $j("#colmask").bind('touchend', function(e){
+    do_work();
+  });
+});
+function next_page() {
+	if (currentPage + 1 < myPages.length) {
+		currentPage++;
+		document.getElementById('comicName').innerHTML = myPages[currentPage][0];
+		parent.main.location = myPages[currentPage][1];
+	}
+}
+function previous_page()
+{
+  	if (currentPage - 1 >= 0) {
+		currentPage--;
+		document.getElementById('comicName').innerHTML = myPages[currentPage][0];
+		parent.main.location = myPages[currentPage][1];
+	}
+}
+function do_work()
+{
+  if ((down_x - up_x) > 50)
+    {
+        next_page();
+    }
+    if ((up_x - down_x) > 50)
+    {
+        previous_page();
+    }
+}
+</script>
+</head>
+<body>
+<div id="colmask">
+	<div id="colmid">
+		<div id="colright">
+			<div id="col1wrap">
+				<div id="col1pad">
+					<div id="col1">
+						<!-- Column 1 (centre) start -->
+						<h1><span id='comicName'>Not Always Right</span></h1>
+						<!-- Column 1 end -->
+					</div>
+				</div>
+			</div>
+			<div id="col2" class='navigation' onClick='previous_page();'>
+				<!-- Column 2 (left) start -->
+				<h2>&lt;</h2>
+				<!-- Column 2 end -->
+			</div>
+			<div id="col3" class='navigation' onClick='next_page();'>
+				<!-- Column 3 start -->
+				<h2>&gt;</h2>
+				<!-- Column 3 end -->
+			</div>
+		</div>
+	</div>
+</div>
+<!--
+This page uses the "Holy Grail Liquid-Layout: No quirks mode" (http://matthewjamestaylor.com/blog/holy-grail-no-quirks-mode.htm) by Matthew James Taylor (http://matthewjamestaylor.com).
+Reproduced with permission.
+-->
+
+</body>
+
+</html>

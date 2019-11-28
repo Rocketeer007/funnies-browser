@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>Nick's Groovy Comics Browser</title>
+<link rel="stylesheet" type="text/css" href="comics.css" media="screen" />
+<script type='text/javascript' src='jquery.js'></script>
+<script type="text/javascript">// <![CDATA[
+var myPages = new Array(
+	new Array('College Roomies from Hell', 'http://www.crfh.net'),
+	new Array('GU Comics', 'http://www.gucomics.com/'),
+	new Array('Sluggy Freelance', 'http://www.sluggy.com/'),
+	new Array('Funny Farm', 'http://www.funnyfarmcomics.com/'),
+	new Array('GPF Comics', './gpf.php'),
+	new Array('Schlock Mercenary', 'http://www.schlockmercenary.com/'),
+	new Array('User Friendly', 'http://www.userfriendly.org/'),
+	new Array('Giant in the Playground', 'http://www.giantitp.com/Comics.html'),
+	new Array('XKCD', 'http://m.xkcd.com/'),
+	new Array('ErfWorld', 'http://www.erfworld.com/'),
+	new Array('Too Much Information', 'http://tmi-comic.com/')
+);
+var currentPage = 0;
+
+var $j = jQuery.noConflict();
+var down_x = null;
+var up_x = null;
+$j().ready(function(){
+  $j("#colmask").mousedown(function(e){
+    e.preventDefault();
+    down_x = e.pageX;
+  });
+  $j("#colmask").mouseup(function(e){
+    up_x = e.pageX;
+    do_work();
+  });
+  $j("#colmask").bind('touchstart', function(e){
+    down_x = e.originalEvent.touches[0].pageX;
+  });
+  $j("#colmask").bind('touchmove', function(e){
+    e.preventDefault();
+    up_x = e.originalEvent.touches[0].pageX;
+  });
+  $j("#colmask").bind('touchend', function(e){
+    do_work();
+  });
+});
+function do_work()
+{
+  if ((down_x - up_x) > 50)
+    {
+        next_page();
+    }
+    if ((up_x - down_x) > 50)
+    {
+        previous_page();
+    }
+}
+function next_page() {
+	if (currentPage + 1 < myPages.length) {
+		currentPage++;
+		document.getElementById('comicName').innerHTML = myPages[currentPage][0];
+		parent.main.location = myPages[currentPage][1];
+	}
+}
+function previous_page()
+{
+  	if (currentPage - 1 >= 0) {
+		currentPage--;
+		document.getElementById('comicName').innerHTML = myPages[currentPage][0];
+		parent.main.location = myPages[currentPage][1];
+	}
+}
+// ]]&gt;</script>
+</head>
+<body>
+<div id="colmask">
+	<div id="colmid">
+		<div id="colright">
+			<div id="col1wrap">
+				<div id="col1pad">
+					<div id="col1">
+						<!-- Column 1 (centre) start -->
+						<h1><span id='comicName'>College Roomies from Hell</span></h1>
+						<!-- Column 1 end -->
+					</div>
+				</div>
+			</div>
+			<div id="col2" class='navigation' onClick='previous_page();'>
+				<!-- Column 2 (left) start -->
+				<h2>&lt;</h2>
+				<!-- Column 2 end -->
+			</div>
+			<div id="col3" class='navigation' onClick='next_page();'>
+				<!-- Column 3 start -->
+				<h2>&gt;</h2>
+				<!-- Column 3 end -->
+			</div>
+		</div>
+	</div>
+</div>
+<!--
+This page uses the "Holy Grail Liquid-Layout: No quirks mode" (http://matthewjamestaylor.com/blog/holy-grail-no-quirks-mode.htm) by Matthew James Taylor (http://matthewjamestaylor.com).
+Reproduced with permission.
+-->
+
+</body>
+
+</html>

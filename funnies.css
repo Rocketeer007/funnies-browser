@@ -1,0 +1,87 @@
+body {
+	margin:0;
+	padding:0;
+	width:100%;
+	background:#fff;
+	min-width:600px;		/* Minimum width of layout - remove line if not required */
+					/* The min-width property does not work in old versions of Internet Explorer */
+	font-size:90%;
+}
+a {
+	color:#369;
+}
+a:hover {
+	color:#fff;
+	background:#369;
+	text-decoration:none;
+}
+h1, h2, h3 {
+	text-align: center;
+	vertical-align: center;
+	margin:.2em 0 .2em 0;
+	padding:0;
+}
+.navigation {
+	cursor: pointer;
+}
+
+p {
+	margin:0 0 0 0;
+	padding:0;
+}
+img {
+	margin:10px 0 5px;
+}
+
+#colmask {
+	position:relative;	/* This fixes the IE7 overflow hidden bug and stops the layout jumping out of place */
+	clear:both;
+	float:left;
+	width:100%;			/* width of whole page */
+	overflow:hidden;		/* This chops off any overhanging divs */
+	background:#FFFFFF;		/* Left column background colour */
+}
+#colmid {
+	float:left;
+	width:200%;
+	position:relative;
+	left:44px;             /* Size of Left Column */
+	background:#FFFFFF;    	/* Centre column background colour */
+}
+#colright {
+	float:left;
+	width:100%;
+	position:relative;
+	left:50%;
+	margin-left:-88px;		/* Size of Right Column + Left Column */
+	background:#FFFFFF;    	/* Right column background colour */
+}
+#col1wrap {
+	float:right;
+	width:50%;
+	position:relative;
+	right:100%;
+}
+#col1pad {
+	margin:0 15px 0 103px;	/* Size of Middle Right Margin, Middle Left Margin + Column Widths */
+	overflow:hidden;
+}
+#col1 {
+	width:100%;
+	overflow:hidden;
+}
+#col2 {
+	float:left;
+	width:44px;          /* Size of Left Column - Left Column Margins */
+	position:relative;
+	margin-left:-50%;
+	left:44px;          /* Size of Right Column + Left column Left margin */
+	overflow:hidden;
+}
+#col3 {
+	float:left;
+	width:44px;          /* Size of Right Column - Right Column Margins */
+	position:relative;
+	left: 0px;           /* Size of Right column Left Margin */
+	overflow:hidden;
+}
